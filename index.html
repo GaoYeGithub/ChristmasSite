@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Site</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scene">
+    <div class="snow-container"></div>
+    <div class="message">🎄 Merry Christmas! 🎄</div>
+    <div class="santa" style="transform: scale(0.5); transform-origin: top left;">
+
+      <div class="santa__body">
+          <div class="santa__leg">
+          <div class="santa__body__foot--r"></div>
+          <div class="santa__body__foot--l"></div>
+          <div class="santa__body__leg--r"></div>
+          <div class="santa__body__leg--l"></div>
+          </div>
+  
+          <div class="santa__body__chest">
+          <div class="santa__body__chest--base"></div>
+          <div class="santa__body__chest--belt"></div>
+          <div class="santa__body__chest--aux"></div>
+          </div>
+  
+          <div class="santa__body__arm">
+          <div class="santa__body__arm--r"></div>
+          <div class="santa__body__arm--l"></div>
+          <div class="santa__bag"></div>
+          <div class="santa__body__hand--r"></div>
+          <div class="santa__body__hand--l"></div>
+          <div class="santa__bag--aux"></div>
+          </div>
+      </div>
+  
+      <div class="santa__head">
+          <div class="santa__head--backofhead"></div>
+          <div class="santa__head--beard"></div>
+          <div class="santa__head--face"></div>
+          <div class="santa__head--eye-r"></div>
+          <div class="santa__head--eye-l"></div>
+          <div class="santa__head--nose"></div>
+      </div>
+  
+      <div class="santa__hat">
+          <div class="santa__hat--fluffy-aux"></div>
+          <div class="santa__hat--base-aux"></div>
+          <div class="santa__hat--base"></div>
+          <div class="santa__hat--fluffy"></div>
+      </div>
+  </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const snowContainer = document.querySelector('.snow-container');
+      const snowflakesCount = 200;
+      const snowflakeImages = [
+        'https://cloud-fvmskgy22-hack-club-bot.vercel.app/0image__4_.png',
+        'https://cloud-fvmskgy22-hack-club-bot.vercel.app/1image__3_.png',
+        'https://cloud-fvmskgy22-hack-club-bot.vercel.app/2image__2_.png',
+        'https://cloud-fvmskgy22-hack-club-bot.vercel.app/3image__1_.png'
+
+      ];
+      
+      for (let i = 0; i < snowflakesCount; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.style.left = `${Math.random() * 100}%`;
+        const size = `${Math.random() * 15 + 10}px`;
+        snowflake.style.width = size;
+        snowflake.style.height = size;
+        snowflake.style.backgroundImage = `url(${snowflakeImages[i % 4]})`;
+        snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        snowflake.style.animationDelay = `${Math.random() * 5}s`;
+        snowflake.style.setProperty('--random-x', Math.random());
+        const opacity = Math.random() * 0.5 + 0.5;
+        snowflake.style.opacity = opacity;
+        snowContainer.appendChild(snowflake);
+      }
+    });
+
+    function createRooftops() {
+      const scene = document.querySelector('.scene');
+      const numRooftops = 5;
+      const positions = [10, 28, 46, 64, 82];
+      
+      for (let i = 0; i < numRooftops; i++) {
+        const rooftopContainer = document.createElement('div');
+        rooftopContainer.className = 'rooftop-container';
+        rooftopContainer.style.left = `${positions[i]}%`;
+        
+        const rooftop = document.createElement('div');
+        rooftop.className = 'rooftop';
+        rooftopContainer.appendChild(rooftop);
+        
+        const chimney = document.createElement('div');
+        chimney.className = 'chimney';
+        rooftopContainer.appendChild(chimney);
+        
+        scene.appendChild(rooftopContainer);
+
+        setInterval(() => {
+          const smoke = document.createElement('div');
+          smoke.className = 'smoke';
+          smoke.style.left = '5px';
+          smoke.style.bottom = '40px';
+          chimney.appendChild(smoke);
+
+          setTimeout(() => {
+            smoke.remove();
+          }, 3000);
+        }, 300);
+      }
+    }
+
+    createRooftops();
+  </script>
+</body>
+</html>
